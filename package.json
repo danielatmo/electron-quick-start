@@ -4,7 +4,9 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "package-win-32": "cross-var electron-packager . $npm_package_name --platform=win32 --arch=x64 --executable-name=$npm_package_productName --out=./builds --icon=logo_atmo.ico --win32metadata.CompanyName=\"$npm_package_author\" --win32metadata.FileDescription=\"$npm_package_title\" --win32metadata.ProductName=\"$npm_package_title\" --overwrite",
+    "create-installer-win": "node ./createinstaller.js"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -17,6 +19,19 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^8.0.2"
+    "cross-var": "^1.1.0",
+    "electron": "^8.0.2",
+    "electron-packager": "^14.2.1",
+    "electron-winstaller": "^4.0.0"
+  },
+  "build": {
+    "appId": "com.github.danielatmo.ds2player",
+    "productName": "DS Player 2",
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "verifyUpdateCodeSignature": "false"
+    }
   }
 }
